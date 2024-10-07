@@ -21,7 +21,6 @@ public class Driver implements DeliveryObserver {
   private String startingAddress;
   private boolean hasReceivedNotification; // Track notification state
 
-
   /**
    * Create a Driver object using driverName,vehicleType,startingAddress parameters.
    *
