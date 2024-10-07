@@ -1,29 +1,76 @@
 
 | CS-665       | Software Design & Patterns |
 |--------------|----------------------------|
-| Name         | FIRST_NAME LAST_NAME       |
-| Date         | MM/DD/YYYY                 |
-| Course       | Fall / Spring / Summer     |
-| Assignment # |                            |
+| Name         | NINA SUDHEESH              |
+| Date         | 10/06/2024                 |
+| Course       | Fall                       |
+| Assignment # | 2                          |
 
 # Assignment Overview
-Please add a paragraph or two overviewing the objectives of the assignment.
+- The goal of the assignment is to create a delivery notification system while using a design pattern that manage
+between different types of drivers( such as scooters, taxi, vans) and the retail stores that need orders to be 
+delivered. 
+- The shop can create delivery requests, with all delivery details.
+- When creating a request, the system creates notifications for delivery drivers, ensuring they stay aware about the
+status of upcoming or potential deliveries. 
+- This helps maintain smooth communication between the shop and available drivers, keeping them aware of any delivery 
+updates that may be assigned to them.
 
 # GitHub Repository Link:
-https://github.com/{YOUR_USERNAME}/cs-665-assignment-{ASSIGNMENT_NUMBER}
-
-# Implementation Description 
-
+https://github.com/ninasudh688/cs665assignment2
+# Implementation Description
 
 For each assignment, please answer the following:
+ 
+  I chose the Observer pattern because the problem emphasized the use of pushing notifications to constantly update
+Drivers about delivery.Observer pattern is used when need inform multiple object/observers  about updates
+to subject state as fast as possible (e.g. such as informing multiple drivers about multiple deliveries). 
+Here, the retail shop acts as the subject, and the delivery drivers are the observers. 
 
-- Explain the level of flexibility in your implementation, including how new object types can
-be easily added or removed in the future.
-- Discuss the simplicity and understandability of your implementation, ensuring that it is
-easy for others to read and maintain.
-- Describe how you have avoided duplicated code and why it is important.
-- If applicable, mention any design patterns you have used and explain why they were
-chosen.
+  - The pattern enables efficient communication between the shop and the drivers, ensuring all subscribed drivers are
+updated on new deliveries changes without tightly coupling them. A loosely coupled design mean that the  app will be 
+flexible and be handle lots of changes/updates. Observers or Drivers can be modified independently of the subject/Shop, 
+and vice versa, making the codebase more maintainable and scalable. The implementation is designed with future 
+flexibility in mind. By using the Observer Pattern ,it’s easy to add or remove new object types (such as different types
+of drivers van,scooter,bike) without modifying the core logic of the Shop. I also added flexibility 
+when I assumed that in future this app would be expanded to also have delivered notifications which
+is why I created handleProductsDelivered() method.
+  - Code duplication has been carefully avoided, by keeping the notification process in theDeliverySubject interface 
+and Shop class, I ensured that the code for managing observers was not DRY or duplicated. The Shop class handles all 
+observer registration, removal, and notification processes. Avoiding duplications is important here because if there
+was a bug in the notification process, debugging and fixing it would be harder especially if the same logic were duplicated 
+in multiple places. By using this pattern you would only need to make changes in one place so that everything is
+consistent and less error-prone.
+  - The implementation has been kept simple and easy to understand by organizing the code. Both interfaces helps to 
+organize the code logically, ensuring a clean separation of concerns. Driver class focuses on receiving delivery 
+notifications,  acting as the Concrete Observer while the Shop , acting as the Concrete Subject, manages/creates 
+delivery requests. Each class serves a distinct role  making it straightforward for others to read and maintain. 
+This separation in roles helps make the code more readable.
+Also, all the code is documented with doc-blocks that explain each method/class's purpose.
+
+- Here is how I used the Observer Pattern/Set up the classes:
+  - DeliverySubject.js = Subject Interface
+  - DeliveryObserver.js = Observer Interface
+  - Driver.js = Concrete Observer
+  - Shop.js = Concrete Subject
+  - DeliveryRequest.js = Concrete Class that has composition relationship with Shop. Shop has a List<DeliveryRequest>
+deliveryRequests objects within it
+  
+  
+Assumptions that I made:
+- I assumed that Shop have store name and location address.
+- I assumed that each driver Name,vehicleType, and initial starting Address.
+- I assumed that each request would need a store name,store location, delivery Address,
+ products , delivery date time, and  delivery status.
+- I assumed that in future this app would be expanded to also have delivered notifications which
+is why I created handleProductsDelivered() method .
+- I assumed that for now all observers are drivers.
+- 
+My code and Running it And UML:
+- I placed my UML diagram in ___ cs665_assignment2_UMLDiagram_Sudheesh.PDF ___ within this zipped folder
+- I placed my code in package deliverydriversystem under the edu.bu.met.cs665 package.
+- The Main class is outside this package.
+- I placed code to test in junit test TestDeliveryNotificationSystem as well as Main class. The code compiles using mvn clean compile.
 
 
 # Maven Commands
@@ -50,11 +97,11 @@ mvn clean compile
 
 
 ## JUnit Tests
-JUnit is a popular testing framework for Java. JUnit tests are automated tests that are written to verify that the behavior of a piece of code is as expected.
+JUnit is a popular testing framework for Java. JUnit's tests are automated tests that are written to verify that the behavior of a piece of code is as expected.
 
 In JUnit, tests are written as methods within a test class. Each test method tests a specific aspect of the code and is annotated with the @Test annotation. JUnit provides a range of assertions that can be used to verify the behavior of the code being tested.
 
-JUnit tests are executed automatically and the results of the tests are reported. This allows developers to quickly and easily check if their code is working as expected, and make any necessary changes to fix any issues that are found.
+JUnit's tests are executed automatically and the results of the tests are reported. This allows developers to quickly and easily check if their code is working as expected, and make any necessary changes to fix any issues that are found.
 
 The use of JUnit tests is an important part of Test-Driven Development (TDD), where tests are written before the code they are testing is written. This helps to ensure that the code is written in a way that is easily testable and that all required functionality is covered by tests.
 
